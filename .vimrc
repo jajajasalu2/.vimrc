@@ -4,22 +4,26 @@ let &packpath = &runtimepath
 set number
 set foldmethod=marker
 let mapleader = '-'
+" }}}
+
+" My own ;) {{{
+execute 'set rtp+=/home/jaskaran/repos/vim-ocamlyacc-jump'
+execute 'set rtp+=/home/jaskaran/repos/vim-word-count'
+
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>d dd
 nnoremap de <esc>viwd
+nnoremap ye <esc>viwy
 noremap <silent> gb :bn<enter>
 noremap <silent> gy :bp<enter>
 noremap <silent> <c-n> :bd<cr>
 nnoremap <c-a> gg^vG$
-nnoremap <c-p> o<esc>p
-
+nnoremap <silent> <F4> :set relativenumber!<cr>
+nnoremap <silent> <leader>pru :call VimOCamlYaccJump()<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-" }}}
 
-" illuminate word {{{
-hi link illuminatedWord Visual
-let g:Illuminate_delay = 1000
+let g:wordcount_descending_order = 1
+map <leader>gc <Plug>CountWords
 " }}}
 
 " LKMP functions & mappings {{{
@@ -173,7 +177,7 @@ nnoremap <silent> <leader>grp :call Grep_word_mask(0)<cr>
 vnoremap <silent> <leader>grp :call Grep_word_mask(1)<cr>
 " }}}
 
-" AsyncRun {{{
+" asyncrun config {{{
 noremap <silent> <F7> :AsyncRun make<cr>
 " }}}
 
@@ -183,32 +187,26 @@ execute 'set rtp+=' . g:opamshare . '/merlin/vim'
 execute 'helptags ' . g:opamshare . '/merlin/vim/doc'
 " }}}
 
-" My own ;) {{{
-execute 'set rtp+=/home/jaskaran/repos/vim-ocamlyacc-jump'
-execute 'set rtp+=/home/jaskaran/repos/vim-word-count'
-
-nnoremap <silent> <leader>pru :call VimOCamlYaccJump()<cr>
-nnoremap <silent> <F4> :set relativenumber!<cr>
-
-let g:wordcount_descending_order = 1
-map <leader>gc <Plug>CountWords
-" }}}
-
 " vim-markbar config {{{
 let g:markbar_enable_peekaboo = v:false
 
 nmap <Leader>m <Plug>ToggleMarkbar
-
-" the following are unneeded if ToggleMarkbar is mapped
-nmap <Leader>mo <Plug>OpenMarkbar
-nmap <Leader>mc <Plug>CloseMarkbar
 " }}}
-
 
 " vim-header config {{{
 let g:header_auto_add_header = 0
 let g:header_field_author = 'Jaskaran Singh'
 let g:header_field_author_email = 'jaskaransingh7654231@gmail.com'
+" }}}
+
+" vim-airline config {{{
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'minimalist'
+" }}}
+
+" vim-illuminate config {{{
+hi link illuminatedWord Visual
+let g:Illuminate_delay = 1000
 " }}}
 
 " Plugins {{{
@@ -218,15 +216,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'scrooloose/nerdtree'
 
-Plug 'vim-scripts/L9'
-
-Plug 'vim-scripts/FuzzyFinder'
-
 Plug 'tpope/vim-fugitive'
-
-Plug 'zefei/vim-wintabs'
-
-Plug 'zefei/vim-wintabs-powerline'
 
 Plug 'romainl/vim-cool'
 
@@ -234,65 +224,37 @@ Plug 'psliwka/vim-smoothie'
 
 Plug 'python-mode/python-mode'
 
-Plug 'liuchengxu/eleline.vim'
-
 Plug 'jajajasalu2/cocci-syntax', {'branch': 'syntax'}
 
 Plug 'vimlab/split-term.vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'simeji/winresizer'
-
-"Plug 'bogado/file-line'
 
 Plug 'google/vim-searchindex'
 
 Plug 'RRethy/vim-illuminate'
 
-Plug 'metakirby5/codi.vim'
-
-"Plug 'vim-airline/vim-airline'
-
 Plug 'skywind3000/asyncrun.vim'
 
 Plug 'skywind3000/asynctasks.vim'
-
-Plug 'justinmk/vim-sneak'
-
-"Plug 'godlygeek/tabular'
 
 Plug 'plasticboy/vim-markdown'
 
 Plug 'ntpeters/vim-better-whitespace'
 
-"Plug 'neomake/neomake'
-
-"Plug 'kshenoy/vim-signature'
-
-Plug 'powerline/powerline'
-
-"Plug 'roman/golden-ratio'
-
-"Plug 'puremourning/vimspector'
-
 Plug 'mhinz/vim-grepper'
-
-"Plug 'jmcantrell/vim-diffchanges'
 
 Plug 'Yilin-Yang/vim-markbar'
 
 Plug 'reasonml-editor/vim-reason-plus'
 
-Plug 'junegunn/vader.vim'
-
 Plug 'alpertuna/vim-header'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-"Plug 'zefei/cake16'
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
-
-"call neomake#configure#automake('w')
 " }}}
